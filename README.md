@@ -8,7 +8,6 @@ A full-stack blog application built with **React**, **Node.js**, and **MySQL**, 
 - 🔐 **User Authentication** (Register/Login using JWT)
 - 🖋 **Create, Read, Update, Delete** blog posts
 - 👤 **Author-based posts** — users can only edit/delete their own posts
-- 🕒 **Timestamps** for all posts
 - 🎨 Simple, responsive UI
 
 ---
