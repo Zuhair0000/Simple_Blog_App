@@ -34,11 +34,76 @@ A full-stack blog application built with **React**, **Node.js**, and **MySQL**, 
 
 
 ### 2️⃣ Login Page
-![Login Page](screenshots/login.png)
+<img width="1535" height="808" alt="Login" src="https://github.com/user-attachments/assets/6f218f11-ebd9-40e4-948c-967fa6288173" />
 
-### 3️⃣ Create Post
-![Create Post](screenshots/create-post.png)
+
+### 3️⃣ Register Page
+<img width="1189" height="797" alt="Register" src="https://github.com/user-attachments/assets/d1af9049-a76c-4909-bda2-f89ae4b35ffe" />
+
+
+### 4️⃣ User Dashboard
+<img width="1315" height="799" alt="User Dashboard" src="https://github.com/user-attachments/assets/28906089-1afe-40b7-93ae-09df2b99f16e" />
+
+
+### 5️⃣ Create Post
+<img width="1228" height="890" alt="Create Post" src="https://github.com/user-attachments/assets/a969d24c-b291-49ad-b5ff-ad9b0beaa5c1" />
+
 
 ---
 
 ## 📂 Project Structure
+project-folder/
+├── backend/
+│   ├── controllers/
+│   ├── routes/
+│   ├── models/
+│   └── server.js
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   └── App.jsx
+└── README.md
+
+---
+
+## ⚙️ Installation & Setup
+
+1. **Clone the repository**
+```bash
+git clone https://github.com/your-username/blog-app.git
+cd blog-app
+
+## Backend Setup
+cd backend
+npm install
+# Create a .env file with:
+# DB_HOST=localhost
+# DB_USER=root
+# DB_PASSWORD=yourpassword
+# DB_NAME=blogdb
+# JWT_SECRET=your_jwt_secret
+npm start
+
+## Frontend Setup
+cd frontend
+npm install
+npm run dev
+
+#Tailwindcss Setup
+1- Install Tailwind CSS
+        npm install tailwindcss @tailwindcss/vite
+2- Configure the Vite plugin (vite.config.ts)
+        import { defineConfig } from 'vite'
+        import tailwindcss from '@tailwindcss/vite'
+        export default defineConfig({
+          plugins: [
+            tailwindcss(),
+          ],
+        })
+3- Import Tailwind CSS in your CSS file
+        @import "tailwindcss";
+---
+📜 License
+
+This project is open-source and available under the MIT License.
