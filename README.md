@@ -24,6 +24,49 @@ A full-stack blog application built with **React**, **Node.js**, and **MySQL**, 
 - MySQL
 - JWT & bcrypt
 
+**DATABASE SCHEMA**
+CREATE DATABASE IF NOT EXISTS blog_app;
+USE blog_app;
+
+CREATE TABLE IF NOT EXISTS users (
+id INT AUTO_INCREMENT PRIMARY KEY,
+username VARCHAR(100) NOT NULL UNIQUE,
+email VARCHAR(100) NOT NULL UNIQUE,
+password VARCHAR(255) NOT NULL,
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS posts (
+id INT AUTO_INCREMENT PRIMARY KEY,
+title VARCHAR(255) NOT NULL,
+content TEXT NOT NULL,
+author_id INT NOT NULL,
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+FOREIGN KEY (author_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- Password is password123
+INSERT INTO users (username, email, password) VALUES
+('Ali Ahmed', 'ali@example.com', '$2b$12$JGnQHx/0AsLifOQVxLB/qeA14MwHAxWC3LMoiwX8jiO6PPEUNj70m'),
+('Sara Hassan', 'sara@example.com', '$2b$12$JGnQHx/0AsLifOQVxLB/qeA14MwHAxWC3LMoiwX8jiO6PPEUNj70m'),
+('Omar Khaled', 'omar@example.com', '$2b$12$JGnQHx/0AsLifOQVxLB/qeA14MwHAxWC3LMoiwX8jiO6PPEUNj70m'),
+('Fatima Noor', 'fatima@example.com', '$2b$12$JGnQHx/0AsLifOQVxLB/qeA14MwHAxWC3LMoiwX8jiO6PPEUNj70m'),
+('Hassan Saleh', 'hassan@example.com', '$2b$12$JGnQHx/0AsLifOQVxLB/qeA14MwHAxWC3LMoiwX8jiO6PPEUNj70m');
+
+
+INSERT INTO posts (title, content, author_id) VALUES
+('My First Blog Post', 'This is my very first blog post. I am excited to share my thoughts and experiences with you all.', 1),
+('React Tips and Tricks', 'React is a powerful library for building UIs. Here are some tips to write cleaner code and improve performance.', 1),
+('Traveling to Malaysia', 'Last month I visited Kuala Lumpur and Penang. The food, culture, and people were amazing!', 2),
+('Learning Node.js', 'Node.js allows you to build backend services using JavaScript. In this post, I explain how to set up a REST API.', 3),
+('Healthy Eating Habits', 'Maintaining a balanced diet is essential for good health. Here are some foods you should include daily.', 4),
+('Photography Basics', 'Photography is about capturing light and moments. Learn the basics of composition, exposure, and lighting.', 5),
+('Docker for Beginners', 'Docker makes it easier to containerize your applications. Here is how to get started with Docker on your machine.', 3),
+('Top 10 Coding Practices', 'Writing clean, maintainable code is key to being a good developer. Here are my top 10 coding practices.', 2),
+('My Journey as a Developer', 'From HTML tables to modern frameworks, here is how I grew as a software developer over the years.', 4);
+
+
+
 ---
 
 ## 📸 Screenshots
