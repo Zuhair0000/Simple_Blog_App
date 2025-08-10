@@ -16,7 +16,7 @@ A full-stack blog application built with **React**, **Node.js**, and **MySQL**, 
 **Frontend:**
 - React.js
 - Fetch API
-- CSS (or your chosen styling library)
+- TailwindCSS
 
 **Backend:**
 - Node.js
