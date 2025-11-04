@@ -5,7 +5,7 @@ type Post = {
   id: number;
   title: string;
   content: string;
-  author_id: string;
+  author_id: number;
   created_at: string | Date;
 };
 
@@ -22,7 +22,7 @@ const PostCart = ({
   onEdit,
   onDelete,
 }: PostCart) => {
-  const formatDate = (dateString) => {
+  const formatDate = (dateString: string | Date) => {
     return new Date(dateString).toLocaleDateString("en-US", {
       year: "numeric",
       month: "long",
@@ -30,7 +30,7 @@ const PostCart = ({
     });
   };
 
-  const truncateContent = (content, maxLength = 100) => {
+  const truncateContent = (content: string, maxLength = 100) => {
     if (content.length <= maxLength) return content;
     return content.substring(0, maxLength) + "...";
   };
