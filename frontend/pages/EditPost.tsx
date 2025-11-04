@@ -2,13 +2,23 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Edit, Save, ArrowLeft } from "lucide-react";
 
+type Errors = {
+  general: string;
+  title: string;
+  content: string;
+};
+
 const EditPost = () => {
   const { id } = useParams();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [loading, setLoading] = useState(false);
   const [initialLoading, setInitialLoading] = useState(true);
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<Errors>({
+    general: "",
+    title: "",
+    content: "",
+  });
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -42,10 +52,10 @@ const EditPost = () => {
     fetchPost();
   }, [id]);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement | null>) => {
     e.preventDefault();
 
-    setErrors({});
+    setErrors({ general: "", title: "", content: "" });
     setLoading(true);
 
     try {
@@ -67,7 +77,10 @@ const EditPost = () => {
       navigate("/dashboard");
     } catch (error) {
       console.error("Error updating post:", error);
-      setErrors({ general: error.message });
+      const errorMessage =
+        error instanceof Error ? error.message : "An unexpected error occurred";
+
+      setErrors({ general: errorMessage, title: "", content: "" });
     } finally {
       setLoading(false);
     }

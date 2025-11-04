@@ -2,16 +2,25 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { PenSquare, Save, ArrowLeft } from "lucide-react";
 
+type Errors = {
+  general: string;
+  title: string;
+  content: string;
+};
 const CreatePost = () => {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const [title, setTitle] = useState<string>("");
+  const [content, setContent] = useState<string>("");
   const [loading, setLoading] = useState(false);
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<Errors>({
+    general: "",
+    title: "",
+    content: "",
+  });
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement | null>) => {
     e.preventDefault();
-    setErrors({});
+    setErrors({ general: "", title: "", content: "" });
     setLoading(true);
 
     try {
@@ -31,8 +40,8 @@ const CreatePost = () => {
       }
       setTitle("");
       setContent("");
-    } catch (err) {
-      setErrors({ general: "Failed", err });
+    } catch (err: any) {
+      setErrors({ general: "Failed", ...err });
     }
   };
 

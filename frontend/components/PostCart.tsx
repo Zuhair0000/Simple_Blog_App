@@ -1,7 +1,27 @@
 import React from "react";
 import { Calendar, User, Eye } from "lucide-react";
 
-const PostCart = ({ post, showActions = false, onEdit, onDelete }) => {
+type Post = {
+  id: number;
+  title: string;
+  content: string;
+  author_id: string;
+  created_at: string | Date;
+};
+
+type PostCart = {
+  post: Post;
+  showActions: boolean;
+  onEdit: (id: number) => void;
+  onDelete: (id: number) => void;
+};
+
+const PostCart = ({
+  post,
+  showActions = false,
+  onEdit,
+  onDelete,
+}: PostCart) => {
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString("en-US", {
       year: "numeric",

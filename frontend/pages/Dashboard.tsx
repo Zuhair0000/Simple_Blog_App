@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import PostCart from "../components/PostCart";
+import PostCart from "../components/PostCart.js";
 import { Plus, LayoutDashboard, Edit, Trash2 } from "lucide-react";
 
 // Mock data for user's posts
@@ -23,13 +23,29 @@ import { Plus, LayoutDashboard, Edit, Trash2 } from "lucide-react";
 //   },
 // ];
 
+type Post = {
+  id: number;
+  title: string;
+  content: string;
+  author_id: number;
+  created_at: string | Date;
+};
+
+type User = {
+  id: number;
+  name: string;
+  email: string;
+};
+
 const Dashboard = () => {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const user = JSON.parse(localStorage.getItem("user"));
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const navigate = useNavigate();
+
+  const userString = localStorage.getItem("user");
+  const user: User | null = userString ? JSON.parse(userString) : null;
   const currentUserId = user?.id;
   console.log(currentUserId);
-  const navigate = useNavigate();
 
   useEffect(() => {
     // Simulate API call to get user's posts
@@ -56,11 +72,11 @@ const Dashboard = () => {
     fetchUserPosts();
   }, []);
 
-  const handleEdit = (postId) => {
+  const handleEdit = (postId: number) => {
     navigate(`/edit/${postId}`);
   };
 
-  const handleDelete = async (postId) => {
+  const handleDelete = async (postId: number) => {
     if (window.confirm("Are you sure you want to delete this post?")) {
       try {
         const token = localStorage.getItem("token"); // Assuming you store JWT here
@@ -83,7 +99,7 @@ const Dashboard = () => {
 
         console.log("Post deleted successfully");
       } catch (error) {
-        console.error("Error deleting post:", error.message);
+        console.error("Error deleting post:", error);
       }
     }
   };
