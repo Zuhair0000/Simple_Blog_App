@@ -2,16 +2,30 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { LogIn, Mail, Lock, AlertCircle } from "lucide-react";
 
+type Errors = {
+  general: string;
+  title: string;
+  content: string;
+};
+
 const Login = () => {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [error, setError] = useState("");
+  const [email, setEmail] = useState<string | number | string[]>("");
+  const [password, setPassword] = useState<string>("");
+  const [error, setError] = useState<Errors>({
+    general: "",
+    title: "",
+    content: "",
+  });
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement | null>) => {
     e.preventDefault();
-    setError("");
+    setError({
+      general: "",
+      title: "",
+      content: "",
+    });
     setLoading(true);
 
     try {
@@ -33,7 +47,9 @@ const Login = () => {
       setPassword("");
       navigate("/dashboard");
     } catch (error) {
-      setError(error.message);
+      const errorMessage =
+        error instanceof Error ? error.message : "UnExpected error";
+      setError({ general: errorMessage, title: "", content: "" });
       setLoading(false);
     }
   };
@@ -63,7 +79,7 @@ const Login = () => {
               <div className="flex">
                 <AlertCircle className="h-5 w-5 text-red-400" />
                 <div className="ml-3">
-                  <p className="text-sm text-red-800">{error}</p>
+                  <p className="text-sm text-red-800">{error.general}</p>
                 </div>
               </div>
             </div>

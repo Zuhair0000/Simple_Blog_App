@@ -1,9 +1,17 @@
 import React, { useState, useEffect } from "react";
-import PostCart from "../components/PostCart";
+import PostCart from "../components/PostCart.js";
 import { BookOpen, TrendingUp } from "lucide-react";
 
+type Post = {
+  id: number;
+  title: string;
+  content: string;
+  author_id: number;
+  created_at: string | Date;
+};
+
 const Home = () => {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

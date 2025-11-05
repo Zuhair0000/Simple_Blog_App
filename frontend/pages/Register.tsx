@@ -9,19 +9,42 @@ import {
   CheckCircle,
 } from "lucide-react";
 
+type Error = {
+  username: "";
+  general: string;
+  title: string;
+  content: string;
+  email: string;
+  password: string;
+};
+
 const Register = () => {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({});
+  const [username, setUsername] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [errors, setErrors] = useState<Error>({
+    username: "",
+    general: "",
+    title: "",
+    content: "",
+    email: "",
+    password: "",
+  });
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement | null>) => {
     e.preventDefault();
 
     if (!username || !email || !password) {
-      setErrors("Please fill in all fields");
+      setErrors({
+        general: "Please fill in all fields",
+        title: "",
+        content: "",
+        username: "",
+        email: "",
+        password: "",
+      });
       return;
     }
 
@@ -46,7 +69,14 @@ const Register = () => {
       setPassword("");
       navigate("/login");
     } catch (err) {
-      setErrors({ general: "Failed", err });
+      setErrors({
+        general: "Failed",
+        title: "",
+        content: "",
+        username: "",
+        email: "",
+        password: "",
+      });
       setLoading(false);
     }
   };
